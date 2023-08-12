@@ -1,12 +1,16 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-
+var passwordtext = document.querySelector("#password");
 
 // TODO: Generate a generatePassword function and the logic associated
 function generatePassword() {
   // this is the function scope (or where the logic lives in this function)
-  var newPassword = "";
-  var lowercaseStr = 'abcdefghijk...';
+  var lowercaseStr = "abcdefghijklmnopqrstuvwxyz";
+  var uppercaseStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var numeric      = "1234567890"
+  var specialcharacters = "!@#$%^&*()+?"
+
+  
 
   // we prompt the USER for data
   var passwordLength = prompt("How long would you like your password to be?")
@@ -35,19 +39,68 @@ function generatePassword() {
     console.log("not lowercase")
   }
 
-  // we run logic on that data
+  var uppercaseConfirm = confirm("Do you want uppercase characters in your password?")
+  console.log("User entered: ", uppercaseConfirm);
+
+  if(uppercaseConfirm == 'true') {
+    console.log("uppercase");
+  } else {
+    console.log("not uppercase")
+  }
+
+  var numericConfirm = confirm("Do you want numeric characters in your password?")
+  console.log("User entered: ", numericConfirm);
+
+  if(numericConfirm == 'true') {
+    console.log("numeric");
+  } else {
+    console.log("not numeric")
+  }
+
+  var specialcharactersConfirm = confirm("Do you want special characters in your password?")
+  console.log("User entered: ", specialcharactersConfirm);
+
+  if(specialcharactersConfirm == 'true') {
+    console.log("special");
+  } else {
+    console.log("not special")
+  }
+ 
+
+var password = ""
+
+if (lowercaseConfirm || uppercaseConfirm || numericConfirm || specialcharactersConfirm) {
+
+    i= 0  ;       
+while (i < passwordLength){
+    if (i < passwordLength && lowercaseConfirm){var getRandomLowerCase = Math.floor(Math.random() * lowercaseStr.length);
+        password = password + lowercaseStr[getRandomLowerCase]; i++ ;} 
+    
+    if (i < passwordLength && uppercaseConfirm){var getRandomupperCase = Math.floor(Math.random() * uppercaseStr.length);
+        password = password + uppercaseStr[getRandomupperCase]; i++ ;} 
+        
+    if (i < passwordLength && numericConfirm){var getRandomnumeric = Math.floor(Math.random() * numeric.length);
+            password = password + numeric[getRandomnumeric]; i++ ;} 
+              
+    if (i < passwordLength && specialcharactersConfirm){var getRandomspecial = Math.floor(Math.random() * specialcharacters.length);
+        password = password + specialcharacters[getRandomspecial]; i++ ;} 
+ }
+
+}
+else {
+  alert("You must select one character type")
+}
 
 
 
-  // we add new characters to our newPasswrod varaiable
-
+  
   // we RETURN the VALUE (of the new Password)
-  return newPassword
+  return password
 }
 
 
 // Write password to the #password input
-function writePassword() {
+function writePassword(password) {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
